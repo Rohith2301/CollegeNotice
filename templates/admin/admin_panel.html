@@ -1,0 +1,41 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}
+    Admin - Dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-5" style="margin-top: 5rem;">Admin Dashboard</h2>
+
+    <div class="row justify-content-center">
+        <!-- Students Card -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg border-0 rounded-3 text-center p-4 bg-light">
+                <div class="card-body">
+                    <h1 class="card-title text-danger display-4 fw-bold">{{ students.count }}</h1>
+                    <h4 class="card-text text-secondary">Students</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teachers Card -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow-lg border-0 rounded-3 text-center p-4 bg-light">
+                <div class="card-body">
+                    <h1 class="card-title text-success display-4 fw-bold">{{ teachers.count }}</h1>
+                    <h4 class="card-text text-secondary">Teachers</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <div class="alert alert-info text-center" role="alert">
+                🎉 Welcome to the Admin Dashboard! Monitor and manage your users effectively.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

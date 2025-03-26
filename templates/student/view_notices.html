@@ -1,0 +1,47 @@
+{% extends 'student/student_base.html' %}
+
+{% block title %}
+    Student Dashboard - Notices
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5" >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary" style="margin-top: 3rem;">Notices for Students</h1>
+            <a href="{% url 'student_dashboard' %}" class="btn btn-outline-secondary shadow-sm">
+                <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="card shadow-lg rounded-3">
+            <div class="card-body p-4">
+                {% if notices %}
+                    <table class="table table-bordered table-striped table-hover align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for notice in notices|dictsortreversed:"id" %}
+                                <tr>
+                                    <td><strong>{{ forloop.counter }}</strong></td>
+                                    <td>
+                                        <span class="badge bg-info text-dark px-2 py-1">{{ notice.title }}</span>
+                                    </td>
+                                    <td class="text-start">{{ notice.content }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h3 class="text-danger text-center my-5">
+                        <i class="bi bi-exclamation-circle"></i> No notices available at the moment.
+                    </h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'student/student_base.html' %}
+
+{% block title %}
+    Student - Dashboard
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4" style="margin-top: 5rem;">
+            <h1 class="text-primary">Student Dashboard</h1>
+            <a href="{% url 'view_notices' %}" class="btn btn-warning shadow-sm">
+                <i class="bi bi-bell-fill"></i> View Notices
+            </a>
+        </div>
+
+        <div class="card shadow-lg rounded-3">
+            <div class="card-body p-4">
+                <table class="table table-bordered table-hover align-middle text-center">
+                    <tbody>
+                        <tr>
+                            <th class="bg-light">Student Name</th>
+                            <td>{{ student.full_name }}</td>
+
+                            <th class="bg-light">Father's Name</th>
+                            <td>{{ student.father_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Gender</th>
+                            <td>
+                                {% if student.gender == "Male" %}
+                                    <span class="badge bg-primary">Male</span>
+                                {% elif student.gender == "Female" %}
+                                    <span class="badge bg-danger">Female</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">{{ student.gender }}</span>
+                                {% endif %}
+                            </td>
+
+                            <th class="bg-light">Mother's Name</th>
+                            <td>{{ student.mother_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Contact Number</th>
+                            <td>{{ student.contact_num }}</td>
+
+                            <th class="bg-light">Email</th>
+                            <td>{{ student.email }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Address</th>
+                            <td>{{ student.address }}</td>
+
+                            <th class="bg-light">City</th>
+                            <td>{{ student.city }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Student ID</th>
+                            <td><strong>#{{ student.stu_id }}</strong></td>
+
+                            <th class="bg-light">Date of Birth</th>
+                            <td>{{ student.date_of_birth }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="bg-light">Course</th>
+                            <td><span class="badge bg-success">{{ student.course }}</span></td>
+
+                            <th class="bg-light">User Name</th>
+                            <td>{{ student.user_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

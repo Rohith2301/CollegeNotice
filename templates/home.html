@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- Banner Section -->
+<div class="position-relative" style="height: 400px;">
+    <img src="{% static 'images/img4.jpg' %}" class="img-fluid w-100" style="height: 600px; object-fit: cover;" alt="Welcome Banner">
+    <div class="position-absolute top-50 start-0 translate-middle-y text-start text-light" style="padding-left: 100px;">
+        <a href="{% url 'student_login' %}" class="btn btn-primary btn-lg shadow-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Student Login
+        </a>
+    </div>
+</div>
+
+<br><br>
+
+<!-- Notice Section -->
+<div class="container">
+    <div class="card shadow-lg rounded-3 mb-5">
+        <div class="card-header bg-primary text-white text-center py-3">
+            <h5 class="mb-0"><i class="bi bi-megaphone"></i> Public Notices</h5>
+        </div>
+
+        <div class="card-body p-4">
+            {% if public_notices %}
+                <h5 class="card-title mb-4 text-center text-secondary"><i class="bi bi-bell"></i> Latest Notices</h5>
+                <table class="table table-hover table-bordered align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th><i class="bi bi-bookmark"></i> Title</th>
+                            <th><i class="bi bi-file-text"></i> Content</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for notice in public_notices %}
+                            <tr>
+                                <td class="fw-bold">{{ notice.title }}</td>
+                                <td class="text-start">{{ notice.content }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h5 class="text-danger text-center my-4">
+                    <i class="bi bi-exclamation-triangle"></i> No public notices available at the moment.
+                </h5>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

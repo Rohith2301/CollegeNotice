@@ -1,0 +1,90 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}
+    Admin - Manage Notices
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1 class="mb-4 text-center" style="margin-top: 5rem;">Manage Notices</h1>
+
+        <table class="table table-hover table-bordered text-center align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Is Public</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notice in notices %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ notice.title }}</td>
+                    <td>{{ notice.content|truncatechars:50 }}</td>
+                    <td>
+                        {% if notice.isPublic %}
+                            <span class="badge bg-success">Public</span>
+                        {% else %}
+                            <span class="badge bg-danger">Private</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <!-- Delete Button -->
+                        <a href="{% url 'delete_notice' notice.id %}" class="btn btn-danger btn-sm mx-1" title="Delete Notice">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+
+                        <!-- Edit Button (Triggers Modal) -->
+                        <button class="btn btn-warning btn-sm mx-1" data-bs-toggle="modal"
+                            data-bs-target="#editModal{{ notice.id }}" title="Edit Notice">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Modal for Editing Notice -->
+                <div class="modal fade" id="editModal{{ notice.id }}" tabindex="-1"
+                    aria-labelledby="editModalLabel{{ notice.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="editModalLabel{{ notice.id }}">✏️ Edit Notice</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{% url 'update_notice' notice.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Title</label>
+                                        <input type="text" name="title" value="{{ notice.title }}" class="form-control"
+                                            placeholder="Enter Notice Title" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Content</label>
+                                        <textarea name="content" class="form-control" rows="5"
+                                            placeholder="Enter Notice Content">{{ notice.content }}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        <select class="form-select" name="status">
+                                            <option value="True" {% if notice.isPublic %}selected{% endif %}>Public</option>
+                                            <option value="False" {% if not notice.isPublic %}selected{% endif %}>Private</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" class="btn btn-primary" value="Update">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
