@@ -11,6 +11,7 @@ phases:
     commands:
       - echo "PRE-Build stage"
       - python --version
+      - python manage.py collectstatic --noinput
       - echo "pre build stage completed"      
 
   build:
