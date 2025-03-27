@@ -1,3 +1,4 @@
+# import the modules here
 from django.shortcuts import render, redirect
 from .models import AboutPage, ContactPage, Student, Notice, Teacher
 
