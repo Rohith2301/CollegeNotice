@@ -1,4 +1,9 @@
-""" import the modules here """
+# notice/urls.py
+
+"""
+This module defines the URL patterns for the 'notice' app.
+It maps view functions to specific URL paths.
+"""
 from django.urls import path
 from . import views
 from django.conf.urls.static import static
