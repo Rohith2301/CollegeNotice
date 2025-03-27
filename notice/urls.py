@@ -1,3 +1,9 @@
+# notice/urls.py
+
+"""
+This module defines the URL patterns for the 'notice' app.
+It maps view functions to specific URL paths.
+"""
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
